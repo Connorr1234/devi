@@ -4,14 +4,21 @@ from discord.ext.commands import has_permissions, MissingPermissions
 import json
 import asyncio
 
+def get_prefix(client, message):
+    try:
+        with open('data/prefixes.json', 'r') as f:
+            prefixes = json.load(f)
 
+        return prefixes[str(message.guild.id)]
+    except:
+        return '?'
 
-description = '''Bot coded in discord.py by IHasGUI#6505'''
-bot = commands.Bot(command_prefix='?', description=description)
+description = '''Bot coded in discord.py by ruperrt#0001'''
+bot = commands.Bot(command_prefix=get_prefix, description=description)
 
 bot.remove_command("help")
 
-with open('reports.json', encoding='utf-8') as f:
+with open('data/reports.json', encoding='utf-8') as f:
   try:
     report = json.load(f)
   except ValueError:
@@ -32,12 +39,28 @@ async def help(ctx):
         em.add_field(name="`?ban`", value="Bans the user provided from the discord server that he is on.")
         em.add_field(name="`?mute`", value="This command gives a user a 'Muted' Role. They are now muted.")
         em.add_field(name="`?kick`", value="This command Kicks a user from the discord server..")
+        em.add_field(name="`?prefix`", value="Changes the bot prefix.")
         em.add_field(name="`?new`", value="This command creates a new ticket for support.")
         em.add_field(name="`?close`", value="This command closes a open ticket.")
         em.add_field(name="`?warn`", value="This command can be used to warn a user and then a reason provided.")
         em.add_field(name="`?purge`", value="This command purges a certain amount of messages in a channel.")
         em.set_footer(text="Devi by ruperrt#0001")
         await ctx.send(embed=em)
+
+@bot.command()
+@has_permissions(administrator=True)
+async def prefix(self, ctx, prefix):
+    """
+    Changes the server prefix for the bot!
+    """
+    with open('data/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(ctx.guild.id)] = prefix
+
+    with open('data/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+    await ctx.send(f"The prefix for this guild is now {prefix}.")
 
 @bot.command(aliases=['stats'])
 async def info(ctx):
@@ -110,7 +133,7 @@ async def warn(ctx,user:discord.User,*reason:str):
       'name':user.name,
       'reasons': [reason,]
     })
-  with open('reports.json','w+') as f:
+  with open('data/reports.json','w+') as f:
     json.dump(report,f)
     await ctx.send("User Successfully warned!")
 
@@ -141,7 +164,7 @@ async def new(ctx, *, args = None):
     else:
         message_content = "".join(args)
 
-    with open("data.json") as f:
+    with open("data/data.json") as f:
         data = json.load(f)
 
     ticket_number = int(data["ticket-counter"])
@@ -186,7 +209,7 @@ async def new(ctx, *, args = None):
     data["ticket-channel-ids"].append(ticket_channel.id)
 
     data["ticket-counter"] = int(ticket_number)
-    with open("data.json", 'w') as f:
+    with open("data/data.json", 'w') as f:
         json.dump(data, f)
     
     created_em = discord.Embed(title="Devi Tickets", description="Your ticket has been created at {}".format(ticket_channel.mention), color=0x00a8ff)
@@ -195,7 +218,7 @@ async def new(ctx, *, args = None):
 
 @bot.command()
 async def close(ctx):
-    with open('data.json') as f:
+    with open('data/data.json') as f:
         data = json.load(f)
 
     if ctx.channel.id in data["ticket-channel-ids"]:
@@ -216,11 +239,11 @@ async def close(ctx):
             index = data["ticket-channel-ids"].index(channel_id)
             del data["ticket-channel-ids"][index]
 
-            with open('data.json', 'w') as f:
+            with open('data/data.json', 'w') as f:
                 json.dump(data, f)
         
         except asyncio.TimeoutError:
-            em = discord.Embed(title="Devi Tickets", description="You have run out of time to close this ticket. Please run the command again.", color=0x00a8ff)
+            embed = discord.Embed(title="Devi Tickets", description="You have run out of time to close this ticket. Please run the command again.", color=0x00a8ff)
             await ctx.send(embed=embed)
 
 
