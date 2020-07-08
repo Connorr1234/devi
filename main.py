@@ -49,7 +49,7 @@ async def help(ctx):
 
 @bot.command()
 @has_permissions(administrator=True)
-async def prefix(self, ctx, prefix):
+async def prefix(ctx, prefix):
     """
     Changes the server prefix for the bot!
     """
