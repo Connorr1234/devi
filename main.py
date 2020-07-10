@@ -55,6 +55,17 @@ async def help(ctx):
         await ctx.send(embed=em)
         
 @bot.command()
+async def ping(ctx):
+
+    start = time.monotonic()
+    msg = await ctx.send('Pinging...')
+    millis = (time.monotonic() - start) * 1000
+    heartbeat = ctx.bot.latency * 1000
+    em = discord.Embed(title="Ping", description=f'Ping: {heartbeat:,.2f}ms\t', color=0x00a8ff)
+    await msg.edit(embed=em)
+
+        
+@bot.command()
 async def poll(msg,*,pollquestion):
   embed=discord.Embed(title=pollquestion, color=0x0000ff)
   embed.set_author(name=msg.author,icon_url=msg.author.avatar_url)
