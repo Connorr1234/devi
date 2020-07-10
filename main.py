@@ -33,6 +33,11 @@ async def on_ready():
     print('------')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?help"))
     
+@bot.event
+async def on_member_join(member):
+    role = discord.utils.get(member.server.roles, role="<MEMBER>")
+    await bot.add_roles(member, role)
+    
 
 @bot.command()
 async def help(ctx):
@@ -159,6 +164,7 @@ async def warn(ctx,user:discord.User,*reason:str):
   with open('data/reports.json','w+') as f:
     json.dump(report,f)
     await ctx.send("User Successfully warned!")
+                              
 
 @bot.command(pass_context=True)
 @commands.has_permissions(administrator=True)
