@@ -4,6 +4,7 @@ from discord.ext.commands import has_permissions, MissingPermissions
 import json
 import asyncio
 import voice.py
+bot.load_extension("voice")
 
 def get_prefix(client, message):
     try:
@@ -268,7 +269,6 @@ async def close(ctx):
         except asyncio.TimeoutError:
             embed = discord.Embed(title="Devi Tickets", description="You have run out of time to close this ticket. Please run the command again.", color=0x00a8ff)
             await ctx.send(embed=embed)
-
 
 
 
