@@ -72,12 +72,12 @@ async def invite(ctx):
         em = discord.Embed(title="Complete", description="", color=0x00a8ff)
         em.add_field(name="", value="Please check your private messages")
         em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
-        await ctx.send("embed=em")
+        await ctx.send(embed=em)
     except:
         em = discord.Embed(title="Error", description="", color=0x00a8ff)
         em.add_field(name="", value="Unable to send, your private messages are turnt off")
         em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
-        await ctx.send("embed=em")
+        await ctx.send(embed=em)
 
 @bot.command()
 @has_permissions(administrator=True)
