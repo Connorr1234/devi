@@ -69,9 +69,15 @@ async def poll(msg,*,pollquestion):
 async def invite(ctx):
     try:
         await ctx.author.send("https://discord.com/oauth2/authorize?client_id=725386908959506602&scope=bot&permissions=>
-        await ctx.send("Cech your DM's! Its In Your Inbox! :mailbox:")
+        em = discord.Embed(title="Complete", description="", color=0x00a8ff)
+        em.add_field(name="", value="Please check your private messages")
+        em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+        await ctx.send("embed=em")
     except:
-        await ctx.send("Oops! Your DM's Are Disabled :mailbox: {0.message.author.mention}".format(ctx))
+        em = discord.Embed(title="Error", description="", color=0x00a8ff)
+        em.add_field(name="", value="Unable to send, your private messages are turnt off")
+        em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+        await ctx.send("emebed=em")
 
 @bot.command()
 @has_permissions(administrator=True)
@@ -88,6 +94,7 @@ async def prefix(ctx, prefix):
         json.dump(prefixes, f, indent=4)
     embed=discord.Embed(title="The bots prefix is now:", description=f"{prefix}")
     embed.set_author(name="Prefix changed")
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await ctx.send(embed=embed)
 
 
@@ -113,7 +120,7 @@ async def info(ctx):
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
     embed=discord.Embed(title="Kick", description="Member Successfully Kicked.")
-    embed.set_footer(text="Devi")
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await ctx.send(embed=embed)
 
 @bot.command()
@@ -121,7 +128,7 @@ async def kick(ctx, member : discord.Member, *, reason=None):
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
     embed=discord.Embed(title="Ban", description="Member Successfully Banned.")
-    embed.set_footer(text="Devi")
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await ctx.send(embed=embed)
 
 @bot.command()
@@ -143,6 +150,7 @@ async def unmute(ctx, user: discord.Member):
 async def announce(ctx, *,announcement):
     channel = bot.get_channel(725445110896001114)
     embed=discord.Embed(title="New Announcement!", description=(announcement))
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await channel.send(embed=embed)
 
 @bot.command(pass_context = True)
@@ -211,7 +219,8 @@ async def new(ctx, *, args = None):
     await ticket_channel.set_permissions(ctx.author, send_messages=True, read_messages=True, add_reactions=True, embed_links=True, attach_files=True, read_message_history=True, external_emojis=True)
 
     em = discord.Embed(title="New ticket from {}#{}".format(ctx.author.name, ctx.author.discriminator), description= "{}".format(message_content), color=0x00a8ff)
-
+    em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+                     
     await ticket_channel.send(embed=em)
 
     pinged_msg_content = ""
