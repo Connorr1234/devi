@@ -31,7 +31,7 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print('------')
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?help"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?help Vers 1.0"))
     
 @bot.event
 async def on_member_join(member):
@@ -50,13 +50,14 @@ async def help(ctx):
         em.add_field(name="`?close`", value="This command closes a open ticket.")
         em.add_field(name="`?warn`", value="This command can be used to warn a user and then a reason provided.")
         em.add_field(name="`?purge`", value="This command purges a certain amount of messages in a channel.")
-        em.set_footer(text="Devi by ruperrt#0001")
+        em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
         await ctx.send(embed=em)
         
 @bot.command()
 async def poll(msg,*,pollquestion):
   embed=discord.Embed(title=pollquestion, color=0x0000ff)
   embed.set_author(name=msg.author,icon_url=msg.author.avatar_url)
+  embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
   pineapple = await msg.send(embed=embed)
 
   poo = "\U0001f44d"
