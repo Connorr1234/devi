@@ -70,7 +70,7 @@ async def poll(msg,*,pollquestion):
 async def slowmode(ctx, delay: int):
   if not 0 <= delay <= 21600:
     return await ctx.send("Invalid delay. Please input delay between 0 (off) and 21600.")
-  await channel.edit(slowmode_delay=delay)
+  await ctx.channel.edit(slowmode_delay=delay)
     
 @bot.command()
 async def invite(ctx):
