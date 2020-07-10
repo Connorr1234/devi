@@ -3,8 +3,7 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 import json
 import asyncio
-import voice.py
-bot.load_extension("voice")
+
 
 def get_prefix(client, message):
     try:
