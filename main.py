@@ -47,6 +47,25 @@ async def help(ctx):
         em.add_field(name="`?purge`", value="This command purges a certain amount of messages in a channel.")
         em.set_footer(text="Devi by ruperrt#0001")
         await ctx.send(embed=em)
+        
+@bot.command()
+async def poll(msg,*,pollquestion):
+  embed=discord.Embed(title=pollquestion, color=0x0000ff)
+  embed.set_author(name=msg.author,icon_url=msg.author.avatar_url)
+  pineapple = await msg.send(embed=embed)
+
+  poo = "\U0001f44d"
+  wee = "\U0001f44e"
+  await pineapple.add_reaction(poo)
+  await pineapple.add_reaction(wee)
+
+@bot.command()
+async def invite(ctx):
+    try:
+        await ctx.author.send("https://discord.com/oauth2/authorize?client_id=725386908959506602&scope=bot&permissions=>
+        await ctx.send("Cech your DM's! Its In Your Inbox! :mailbox:")
+    except:
+        await ctx.send("Oops! Your DM's Are Disabled :mailbox: {0.message.author.mention}".format(ctx))
 
 @bot.command()
 @has_permissions(administrator=True)
@@ -61,7 +80,10 @@ async def prefix(ctx, prefix):
 
     with open('data/prefixes.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
-    await ctx.send(f"The prefix for this guild is now {prefix}.")
+    embed=discord.Embed(title="The bots prefix is now:", description=f"{prefix}")
+    embed.set_author(name="Prefix changed")
+    await ctx.send(embed=embed)
+
 
 @bot.command(aliases=['stats'])
 async def info(ctx):
