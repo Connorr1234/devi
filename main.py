@@ -34,7 +34,7 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?help"))
     
 @bot.event
-async def on_member_join(member):
+async def on_member_join(member.guild.roles):
     role = discord.utils.get(member.server.roles, role="<MEMBER>")
     await bot.add_roles(member, role)
     
