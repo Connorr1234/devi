@@ -299,6 +299,5 @@ async def close(ctx):
 
 
 
-bot.run('NzI1Mzg2OTA4OTU5NTA2NjAy.Xwitjw.C0AcIX0Msod3npdiZcDwfEt6UkI')
-                       
+bot.run('lol")               
  
