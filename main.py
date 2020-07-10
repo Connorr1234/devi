@@ -66,10 +66,10 @@ async def poll(msg,*,pollquestion):
   await pineapple.add_reaction(wee)
     
 @bot.command()    
-@commands.has_permissions(manage_channels=true)
+@commands.has_permissions(manage_channels=True)
 async def slowmode(ctx, delay: int):
- if not 0 <= delay <= 21600:
-  return await ctx.send("Invalid delay. Please input delay between 0 (off) and 21600.")
+  if not 0 <= delay <= 21600:
+    return await ctx.send("Invalid delay. Please input delay between 0 (off) and 21600.")
   await channel.edit(slowmode_delay=delay)
     
 @bot.command()
