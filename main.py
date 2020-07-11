@@ -250,7 +250,7 @@ async def warnings(ctx,user:discord.User):
     if user.name == current_user['name']:
         em = discord.Embed(title="Punishment", description="You have been warned", color=0xd40808)
         em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
-        em.add_field(name="Reasons,", value="f"{user.name} has been reported {len(current_user['reasons'])} times : {','.join(current_user['reasons'])}")
+        em.add_field(name="Reasons,", value=f"{user.name} has been reported {len(current_user['reasons'])} times : {','.join(current_user['reasons'])}")
         em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
       await ctx.send(embed=em)
       break
