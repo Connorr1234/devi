@@ -252,7 +252,7 @@ async def warnings(ctx,user:discord.User):
         embed.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
         embed.add_field(name="Reasons,", value=f"{user.name} has been reported {len(current_user['reasons'])} times : {','.join(current_user['reasons'])}")
         embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
-      await ctx.send(embed=embed)
+        await ctx.send(embed=embed)
       break
   else:
 
