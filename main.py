@@ -39,6 +39,7 @@ async def on_member_join(member):
     await bot.add_roles(member, role)
     
 
+    
 @bot.command()
 async def help(ctx):
         em = discord.Embed(title="Devi Help", description="", color=0x00a8ff)
@@ -54,6 +55,18 @@ async def help(ctx):
         em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
         await ctx.send(embed=em)
         
+        
+@bot.command()
+async def ping(ctx):
+
+    start = time.monotonic()
+    msg = await ctx.send('Pinging...')
+    millis = (time.monotonic() - start) * 1000
+    heartbeat = ctx.bot.latency * 1000
+    em = discord.Embed(title="Ping", description=f'Response time: {heartbeat:,.2f}ms\t', color=0x00a8ff)
+    await msg.edit(embed=em)
+ 
+
 @bot.command()
 async def poll(msg,*,pollquestion):
   embed=discord.Embed(title=pollquestion, color=0x0000ff)
