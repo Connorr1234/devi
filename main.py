@@ -134,38 +134,73 @@ async def info(ctx):
 
 
 
-
-
-
 @bot.command()
 @has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
-    await member.kick(reason=reason)
-    embed=discord.Embed(title="Kick", description="Member Successfully Kicked.")
+    em = discord.Embed(title="Punishment", description="You have been kicked", color=0xd40808)
+    em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
+    em.add_field(name="Reason,", value=f"You was kicked for {reason}")
+    em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.message.mentions[0].send(embed=em)
+
+    embed=discord.Embed(title="Kick", description=f"Member Successfully Kicked for {reason}", color=0xd40808)
     embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await ctx.send(embed=embed)
+    await member.kick(reason=reason)
 
 @bot.command()
 @has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
-    await member.ban(reason=reason)
-    embed=discord.Embed(title="Ban", description="Member Successfully Banned.")
+    em = discord.Embed(title="Punishment", description="You have been banned", color=0xd40808)
+    em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
+    em.add_field(name="Reason,", value=f"You was banned for {reason}")
+    em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.message.mentions[0].send(embed=em)
+
+    embed=discord.Embed(title="Kick", description=f"Member Successfully banned for {reason}", color=0xd40808)
     embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await ctx.send(embed=embed)
+    await member.ban(reason=reason)
+
 
 @bot.command()
 @has_permissions(administrator=True)
 async def mute(ctx, user: discord.Member):
     role = discord.utils.get(ctx.guild.roles, name="Muted")
     await user.add_roles(role)
-    await ctx.send("Member Successfully Muted!")
 
+    em = discord.Embed(title="Punishment", description="You have been muted", color=0xd40808)
+    em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
+    em.add_field(name="Reason,", value="Comming soon ")
+    em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.message.mentions[0].send(embed=em)
+
+    embed=discord.Embed(title="Mute", description=f"Member Successfully muted", color=0xd40808)
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.send(embed=embed)
+
+  
 @bot.command()
 @has_permissions(administrator=True)
 async def unmute(ctx, user: discord.Member):
     role = discord.utils.get(ctx.guild.roles, name="Muted")
     await user.remove_roles(role)
-    await ctx.send("Member Successfully Unmuted!")
+
+    em = discord.Embed(title="Punishment", description="You have been Un-muted", color=0xd40808)
+    em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
+    em.add_field(name="Reason,", value=" Comming soon ")
+    em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.message.mentions[0].send(embed=em)
+
+    embed=discord.Embed(title="Un-Mute", description=f"Member Successfully Un-muted", color=0xd40808)
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.send(embed=embed)
+
+
+
+
+
+
 
 @bot.command()
 @has_permissions(administrator=True)
@@ -175,11 +210,13 @@ async def announce(ctx, *,announcement):
     embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
     await channel.send(embed=embed)
 
-@bot.command(pass_context = True)
+bot.command(pass_context = True)
 @has_permissions(manage_roles=True, ban_members=True)
 async def warn(ctx,user:discord.User,*reason:str):
   if not reason:
-    await ctx.send("Please provide a reason")
+    embed=discord.Embed(title="Error", description=f"Please provide a reason", color=0xd40808)
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.send(embed=embed)
     return
   reason = ' '.join(reason)
   for current_user in report['users']:
@@ -194,25 +231,44 @@ async def warn(ctx,user:discord.User,*reason:str):
     })
   with open('data/reports.json','w+') as f:
     json.dump(report,f)
-    await ctx.send("User Successfully warned!")
-                              
+    em = discord.Embed(title="Punishment", description="You have been warned", color=0xd40808)
+    em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
+    em.add_field(name="Reason,", value=" Comming soon ")
+    em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.message.mentions[0].send(embed=em)
+    embed=discord.Embed(title="Complete", description="This user has been warned", color=0xd40808)
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.send(embed=embed)
 
-@bot.command(pass_context=True)
-@commands.has_permissions(administrator=True)
-async def purge(ctx, limit: int):
-      await ctx.channel.purge(limit=limit)
-      await ctx.send('Cleared by {}'.format(ctx.author.mention))
+
+
 
 
 @bot.command(pass_context = True)
 async def warnings(ctx,user:discord.User):
   for current_user in report['users']:
     if user.name == current_user['name']:
-      await ctx.send(f"{user.name} has been reported {len(current_user['reasons'])} times : {','.join(current_user['reasons'])}")
+        em = discord.Embed(title="Punishment", description="You have been warned", color=0xd40808)
+        em.add_field(name="Hello,", value="if you think this was a mistake please contact staff")
+        em.add_field(name="Reasons,", value="f"{user.name} has been reported {len(current_user['reasons'])} times : {','.join(current_user['reasons'])}")
+        em.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+      await ctx.send(embed=em)
       break
   else:
-    await ctx.send(f"{user.name} has never been reported")  
 
+    embed = discord.Embed(title="Reports", description="f"{user.name} has never been reported"", color=0xd40808)
+    embed.set_footer(text="Devi by ruperrt#0001 Vers 1.0")
+    await ctx.send(embed=embed)  
+
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
 @bot.command()
 async def new(ctx, *, args = None):
 
